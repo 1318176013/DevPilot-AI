@@ -8,21 +8,9 @@ from app.core.database import get_db
 from app.models.project import Project
 from app.models.requirement import Requirement
 from app.schemas.requirement import RequirementCreate, RequirementRead, RequirementUpdate
+from app.services.requirement_engine import structure_requirement
 
 router = APIRouter(prefix="/api/requirements", tags=["requirements"])
-
-
-def structure_requirement(title: str, raw_requirement: str) -> dict[str, object]:
-    return {
-        "title": title,
-        "goal": raw_requirement,
-        "scope": "MVP 基础结构化结果，后续由 Requirement Engine 增强",
-        "acceptance_criteria": [
-            "需求已成功保存",
-            "需求可以在项目下查询",
-            "需求状态可流转",
-        ],
-    }
 
 
 @router.post("", response_model=RequirementRead, status_code=status.HTTP_201_CREATED)

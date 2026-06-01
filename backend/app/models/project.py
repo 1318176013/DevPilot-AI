@@ -28,4 +28,5 @@ class Project(Base):
     )
 
     requirements = relationship("Requirement", back_populates="project", cascade="all, delete-orphan")
+    constraint_rules = relationship("ConstraintRule", back_populates="project", cascade="all, delete-orphan")
 

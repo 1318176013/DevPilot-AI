@@ -4,10 +4,13 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
+from app.api.agent_runs import router as agent_runs_router
+from app.api.dag import router as dag_router
 from app.api.health import router as health_router
 from app.api.models import router as models_router
 from app.api.projects import router as projects_router
 from app.api.requirements import router as requirements_router
+from app.api.tools import router as tools_router
 from app.core.config import get_settings
 from app.core.database import init_db
 
@@ -34,4 +37,7 @@ app.include_router(health_router)
 app.include_router(projects_router)
 app.include_router(requirements_router)
 app.include_router(models_router)
+app.include_router(dag_router)
+app.include_router(agent_runs_router)
+app.include_router(tools_router)
 

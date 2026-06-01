@@ -1,8 +1,12 @@
 "use client";
 
 import { useState } from "react";
+import { AgentRunView } from "@/components/agent-run-view";
+import { DagView } from "@/components/dag-view";
+import { PatchWorkflowView } from "@/components/patch-workflow-view";
 import { ProjectCreateForm } from "@/components/project-create-form";
 import { RequirementCreateForm } from "@/components/requirement-create-form";
+import { ToolPolicyView } from "@/components/tool-policy-view";
 import type { Project, Requirement } from "@/lib/types";
 
 export function WorkspaceClient({
@@ -50,6 +54,11 @@ export function WorkspaceClient({
           ))}
         </div>
       </section>
+
+      <DagView requirements={requirements} />
+      <AgentRunView requirements={requirements} />
+      <ToolPolicyView projects={projects} />
+      <PatchWorkflowView projects={projects} requirements={requirements} />
     </div>
   );
 }

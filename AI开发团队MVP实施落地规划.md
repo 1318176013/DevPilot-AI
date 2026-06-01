@@ -655,58 +655,120 @@ DOC-04 MVP 限制说明
 - `http://localhost:8000/docs` 返回 200
 ```
 
-### Sprint 3：Requirement Engine + DAG Engine
+### Sprint 3：Requirement Engine + DAG Engine ✅ 已完成
 
 目标：自然语言需求可生成 DAG。
 
+完成时间：2026-06-01
+
 任务：
 
 ```text
-BE-06 Requirement Engine
-BE-07 DAG 数据模型与 API
-BE-08 DAG Engine
-FE-06 DAG 可视化页面
-CLI-04 requirement 命令组
-CLI-05 dag 命令组
-QA-02 Requirement Engine 测试样例
-QA-03 DAG Engine 测试样例
+[x] BE-06 Requirement Engine
+[x] BE-07 DAG 数据模型与 API
+[x] BE-08 DAG Engine
+[x] FE-06 DAG 可视化页面
+[x] CLI-04 requirement 命令组
+[x] CLI-05 dag 命令组
+[x] QA-02 Requirement Engine 测试样例
+[x] QA-03 DAG Engine 测试样例
 ```
 
 验收：
 
 ```text
-- 输入需求后生成结构化结果
-- 结构化需求可生成 DAG
-- UI 可展示 DAG
-- CLI 可查看 DAG
+[x] 输入需求后生成结构化结果
+[x] 结构化需求可生成 DAG
+[x] UI 可展示 DAG
+[x] CLI 可查看 DAG
 ```
 
-### Sprint 4：Agent Runtime + Tool + Policy
+验收结果：
+
+```text
+- Requirement Engine 已抽离到服务层，可生成结构化需求 JSON。
+- DAG Engine 已支持 analysis / design / coding / testing / review 串行节点模板。
+- DAG API 已支持生成、查询、节点状态更新。
+- 前端工作台已展示 DAG 节点、状态和依赖关系。
+- CLI 已支持 requirement / dag 相关基础命令。
+```
+
+### Sprint 4：Agent Runtime + Tool + Policy ✅ 已完成
 
 目标：Agent 可执行一个编码节点。
 
+完成时间：2026-06-01
+
 任务：
 
 ```text
-BE-09 AgentBackend 接口
-BE-10 Agent Runtime
-BE-11 Lightweight Agent
-BE-12 Tool Registry
-BE-13 Policy Guard
-BE-14 Agent Run 日志
-FE-07 Agent 运行监控页面
-FE-08 Diff 查看页面
-QA-04 Tool / Policy Guard 测试
+[x] BE-09 AgentBackend 接口（Lightweight Runtime MVP）
+[x] BE-10 Agent Runtime
+[x] BE-11 Lightweight Agent
+[x] BE-12 Tool Registry
+[x] BE-13 Policy Guard
+[x] BE-14 Agent Run 日志
+[x] FE-07 Agent 运行监控页面
+[x] FE-08 Diff 查看页面 / 补丁预览与确认应用
+[x] QA-04 Tool / Policy Guard 测试
 ```
 
 验收：
 
 ```text
-- Agent Run 可启动
-- Agent 可读取和搜索项目文件
-- Agent 可修改允许范围内文件
-- Agent 可执行白名单命令
-- UI 可查看日志和 Diff
+[x] Agent Run 可启动
+[x] Agent 可读取和搜索项目文件
+[x] Agent 可修改允许范围内文件
+[x] Agent 可执行白名单命令
+[x] UI 可查看日志和 Diff
+```
+
+验收结果：
+
+```text
+- Agent Run API 已支持创建运行、查询运行详情、查看 Action 和 Tool Call Log。
+- Lightweight Agent 已接入真实工具调用，支持 code.search、git.diff、受控 file.write。
+- Tool Registry 已内置 file.read、file.write、code.search、shell.run、git.diff、test.run。
+- Policy Guard 已实现项目路径限制、命令白名单、Git 高危命令拦截、删除限制和违规日志。
+- 补丁流程已支持 Diff 预览、expected_original_content 冲突保护、确认写入、应用后 git.diff、可选验证命令。
+- 补丁应用可关联 Agent Run，并写入 patch.apply AgentAction 审计记录。
+- 后端已校验补丁关联的 Agent Run 必须属于当前项目，前端已限制需求/运行选择并展示约束提示。
+- 前端已提供 Agent Run 详情、工具策略、DAG、补丁工作流视图。
+```
+
+### Sprint 5：前端工作台 + CLI + 端到端验证 🚧 进行中
+
+目标：Web UI 和 CLI 可完成主流程，并形成可重复端到端演示。
+
+任务：
+
+```text
+[x] FE-03 API Client 封装
+[x] FE-04 项目列表页面
+[x] FE-05 需求工作台页面
+[x] FE-06 DAG 可视化页面
+[x] FE-07 Agent 运行监控页面
+[x] FE-08 Diff 查看页面 / 补丁工作流
+[ ] FE-09 模型管理页面完善
+[ ] FE-10 设置：项目策略完善
+[x] CLI-01 CLI 工程初始化
+[x] CLI-02 配置后端地址
+[x] CLI-03 project 命令组
+[x] CLI-04 requirement 命令组
+[x] CLI-05 dag 命令组
+[x] CLI-06 run 命令组
+[ ] CLI-07 日志 watch 输出
+[ ] QA-05 端到端 Demo 脚本
+```
+
+当前验收状态：
+
+```text
+[x] Web UI 可完成项目、需求、DAG、Agent Run、补丁预览/应用主要操作
+[x] 用户能看到 DAG、日志、Diff、工具调用和审计动作
+[x] CLI 可完成基础项目/需求/DAG/运行操作
+[ ] 至少一个端到端演示脚本化并记录
+[ ] 本地部署和 Demo 文档补齐
 ```
 
 ---
@@ -729,20 +791,20 @@ QA-04 Tool / Policy Guard 测试
 MVP 完成时必须满足：
 
 ```text
-[ ] 可以创建本地项目
+[x] 可以创建本地项目
 [ ] 可以配置模型供应商和默认模型
-[ ] 可以创建自然语言需求
-[ ] 可以生成结构化需求
-[ ] 可以生成 DAG 任务节点
-[ ] 可以启动 Agent Run
-[ ] Agent 可以读取、搜索、修改项目文件
-[ ] Agent 可以执行白名单验证命令
-[ ] Policy Guard 可以拦截危险操作
-[ ] 可以查看 Agent 日志
-[ ] 可以查看代码 Diff
-[ ] 可以生成执行报告
-[ ] 可以通过 Web UI 完成主流程
-[ ] 可以通过 CLI 查看关键状态
+[x] 可以创建自然语言需求
+[x] 可以生成结构化需求
+[x] 可以生成 DAG 任务节点
+[x] 可以启动 Agent Run
+[x] Agent 可以读取、搜索、修改项目文件
+[x] Agent 可以执行白名单验证命令
+[x] Policy Guard 可以拦截危险操作
+[x] 可以查看 Agent 日志
+[x] 可以查看代码 Diff
+[x] 可以生成执行报告
+[x] 可以通过 Web UI 完成主流程
+[x] 可以通过 CLI 查看关键状态
 [ ] 有本地部署文档
 [ ] 有 MVP Demo 文档
 ```
@@ -763,4 +825,4 @@ MVP 完成时必须满足：
 先基础约束，后治理体系。
 ```
 
-当前 `Sprint 1` 与 `Sprint 2` 已完成，下一阶段建议进入 `Sprint 3：Requirement Engine + DAG Engine`，跑通“自然语言需求 → 结构化需求 → DAG 任务节点”的最小闭环。
+当前 `Sprint 1`、`Sprint 2`、`Sprint 3`、`Sprint 4` 已完成，`Sprint 5：前端工作台 + CLI + 端到端验证` 正在进行中。下一阶段建议补齐模型管理/策略设置细节、CLI 日志 watch、本地部署文档和 MVP Demo 文档，并将端到端演示脚本化。

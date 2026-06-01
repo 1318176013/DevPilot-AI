@@ -26,3 +26,5 @@ class Requirement(Base):
     )
 
     project = relationship("Project", back_populates="requirements")
+    dag_nodes = relationship("DagNode", back_populates="requirement", cascade="all, delete-orphan")
+    agent_runs = relationship("AgentRun", back_populates="requirement", cascade="all, delete-orphan")

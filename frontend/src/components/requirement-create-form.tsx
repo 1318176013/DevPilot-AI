@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { apiPost } from "@/lib/api";
 import type { Project, Requirement } from "@/lib/types";
 
@@ -16,6 +16,12 @@ export function RequirementCreateForm({
   const [rawRequirement, setRawRequirement] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
+
+  useEffect(() => {
+    if (!projects.some((project) => project.id === projectId)) {
+      setProjectId(projects[0]?.id ?? "");
+    }
+  }, [projectId, projects]);
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
