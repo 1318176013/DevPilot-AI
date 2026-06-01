@@ -575,56 +575,84 @@ DOC-04 MVP 限制说明
 
 ## 14. 第一批 Sprint 建议
 
-### Sprint 1：工程骨架与基础设施
+### Sprint 1：工程骨架与基础设施 ✅ 已完成
 
 目标：系统能启动。
 
+完成时间：2026-06-01
+
 任务：
 
 ```text
-INFRA-01 Docker Compose
-INFRA-02 PostgreSQL 初始化
-INFRA-03 Redis 初始化
-INFRA-04 Qdrant 初始化
-BE-01 后端工程初始化
-BE-02 数据库连接与 Alembic 迁移
-FE-01 前端工程初始化
-FE-02 基础 Layout 和导航
+[x] INFRA-01 Docker Compose
+[x] INFRA-02 PostgreSQL 初始化
+[x] INFRA-03 Redis 初始化
+[x] INFRA-04 Qdrant 初始化
+[x] BE-01 后端工程初始化
+[x] BE-02 数据库连接与基础健康检查
+[x] FE-01 前端工程初始化
+[x] FE-02 基础 Layout 和导航
 ```
 
 验收：
 
 ```text
-- docker compose up 成功
-- 后端 /health 成功
-- 前端首页成功
-- 前端可调用后端 health API
+[x] docker compose up 成功
+[x] 后端 /health 成功
+[x] 后端 /ready 成功，PostgreSQL / Redis / Qdrant 全部 ready
+[x] 前端首页成功
+[x] 前端可调用后端 health API
 ```
 
-### Sprint 2：项目、模型、需求基础能力
+验收结果：
+
+```json
+{
+  "status": "ready",
+  "checks": {
+    "postgres": true,
+    "redis": true,
+    "qdrant": true
+  }
+}
+```
+
+
+### Sprint 2：项目、模型、需求基础能力 ✅ 已完成
 
 目标：能创建项目和需求。
 
+完成时间：2026-06-01
+
 任务：
 
 ```text
-BE-03 Project API
-BE-04 Model Registry API
-BE-05 Requirement API
-FE-03 API Client 封装
-FE-04 项目列表页面
-FE-05 需求工作台页面基础版
-CLI-01 CLI 工程初始化
-CLI-03 project 命令组
+[x] BE-03 Project API
+[x] BE-04 Model Registry API
+[x] BE-05 Requirement API
+[x] FE-03 API Client 封装
+[x] FE-04 项目列表页面
+[x] FE-05 需求工作台页面基础版
+[x] CLI-01 CLI 工程初始化
+[x] CLI-03 project 命令组
 ```
 
 验收：
 
 ```text
-- UI 可创建项目
-- UI 可创建需求
-- CLI 可查看项目列表
-- Swagger 可查看接口
+[x] UI 可创建项目
+[x] UI 可创建需求
+[x] CLI 可查看项目列表
+[x] Swagger 可查看接口
+```
+
+验收结果：
+
+```text
+- Project API / Requirement API / Model Registry API 已挂载到 FastAPI
+- 首页工作台已支持创建项目和需求，并展示列表
+- `python -m app.cli project list` 可查看项目列表
+- `http://localhost:8000/docs` 返回 200
 ```
 
 ### Sprint 3：Requirement Engine + DAG Engine
@@ -735,4 +763,4 @@ MVP 完成时必须满足：
 先基础约束，后治理体系。
 ```
 
-第一阶段建议立即从 `Sprint 1：工程骨架与基础设施` 开始执行。
+当前 `Sprint 1` 与 `Sprint 2` 已完成，下一阶段建议进入 `Sprint 3：Requirement Engine + DAG Engine`，跑通“自然语言需求 → 结构化需求 → DAG 任务节点”的最小闭环。
